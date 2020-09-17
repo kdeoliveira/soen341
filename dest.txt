@@ -1,0 +1,4 @@
+3. Obtaining a Method Object
+First, we need to get a Method object that reflects the method we want to invoke. 
+The Class object, representing the type in which the method is defined, 
+provides two ways of doing this.
