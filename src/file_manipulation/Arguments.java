@@ -1,5 +1,7 @@
-package fileManipulation;
+package file_manipulation;
 import java.util.*;
+
+import file_manipulation.exception.InvalidArgumentUtil;
 
 public class Arguments {
     private List<String> argsName;
@@ -16,30 +18,29 @@ public class Arguments {
 
         optionnal = argsName.stream().filter(
             x -> x.startsWith("-")
-        ).findAny()
+        ).findFirst()
         .orElse(null);
 
         if(optionnal != null)
             argsName.remove(optionnal);
     }
 
-    public String getOptions(){
+    public String getOptions() throws InvalidArgumentUtil{
         if(!this.isValid())
             return null;
         return optionnal;
     }
 
-    public List<String> getArguments(){
+    public List<String> getArguments() throws InvalidArgumentUtil{
         if(!this.isValid())
             return Collections.emptyList();
 
         return argsName;
-
     }
 
-    public boolean isValid(){
+    public boolean isValid() throws InvalidArgumentUtil{
         if(argsSize < 1)
-            return false;
+            throw new InvalidArgumentUtil("missing operand");
 
         if(argsSize > 2)
             return optionnal != null;
