@@ -2,7 +2,7 @@
 
 # Department of Computer Science and Software Engineering
 
-## SOEN341 Fall 2020 - Project A - Part 1
+## SOEN341 Fall 2020 - Project A - Part 2
 
 ## Purpose
 
