@@ -2,16 +2,19 @@ package file_manipulation;
 
 import java.io.*;
 
+import file_manipulation.counter.*;
 import file_manipulation.counter.SequenceCounter;
 import file_manipulation.exception.InvalidArgumentUtil;
 
 public class LineCount extends FileUtil {
     private static final int NUMBER_ARGUMENTS = 1;
+    private Countable countable;
 
     public LineCount(Administrator arguments){
         VERBOSEMESSAGE = "This file contains %s lines";
         this.arguments = arguments;
         super.processArguments(NUMBER_ARGUMENTS);
+
     }
 
 
@@ -19,10 +22,11 @@ public class LineCount extends FileUtil {
     public int execute() throws IOException{
         if(!this.isValid())     return -1;
 
-        try(SequenceCounter lineCounter = new SequenceCounter(srcPath)){
+        try{
+            this.countable = new SequenceCounter(srcPath);
             this.execOptions();
-            lineCounter.counter();
-            this.counter = lineCounter.getCounter();
+            countable.counter();
+            this.counter = countable.getCounter();
         }
         catch(InvalidArgumentUtil e){
             e.printError();

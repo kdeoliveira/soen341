@@ -9,9 +9,12 @@ public class KeywordCounter extends DataCounter {
     public KeywordCounter(File file) throws IOException{
         super(file);
     }
+    public KeywordCounter() throws IOException{
+        super();
+    }
 
 
-    protected void count() throws IOException{
+    public void counter() throws IOException{
         int ch = file.read();
         if(ch == EOF)                  return;
 
@@ -26,6 +29,6 @@ public class KeywordCounter extends DataCounter {
             flagKeyword = false;
         }
             
-        this.count();
+        this.counter();
     }
 }

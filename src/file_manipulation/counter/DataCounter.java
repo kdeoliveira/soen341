@@ -2,7 +2,7 @@ package file_manipulation.counter;
 
 import java.io.*;
 
-public abstract class DataCounter implements AutoCloseable, Countable{
+public abstract class DataCounter implements Countable{
     protected static final int EOF = -1;
     protected static final char NONE = '\0';
     protected static final char SPACE = ' ';
@@ -14,8 +14,8 @@ public abstract class DataCounter implements AutoCloseable, Countable{
     FileInputStream file;
 
     public DataCounter(){
-        file = null;
         outputChar = NONE;
+        file = null;
     }
 
     public DataCounter(File file) throws IOException{
@@ -26,14 +26,15 @@ public abstract class DataCounter implements AutoCloseable, Countable{
 
     public void counter(char ch) throws IOException{
         this.outputChar = ch;
-        count();
+        counter();
     }
-    public void counter() throws IOException{
-        this.outputChar = NONE;
-        count();
+    public void counter(File file) throws IOException{
+        this.file = new FileInputStream(file);
+        counter();
     }
 
-    protected abstract void count() throws IOException;
+    public abstract void counter() throws IOException;
+
 
     public int getCounter(){
         return this.counter;
@@ -45,8 +46,12 @@ public abstract class DataCounter implements AutoCloseable, Countable{
     }
 
     public void close() throws IOException{
+        try{
             file.close();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            throw new IOException(e.toString());
+        }
     }
-
-
 }

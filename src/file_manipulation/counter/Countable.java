@@ -1,8 +1,9 @@
 package file_manipulation.counter;
 
-import java.io.IOException;
+import java.io.*;
 
-@FunctionalInterface
-public interface Countable {
-    public void counter() throws IOException;
+
+public interface Countable extends AutoCloseable{
+    public void counter(File file) throws IOException;
+    public int getCounter();
 }

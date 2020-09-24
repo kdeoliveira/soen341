@@ -2,10 +2,11 @@ package file_manipulation;
 
 import java.io.*;
 
+import file_manipulation.counter.Countable;
 import file_manipulation.exception.InvalidArgumentUtil;
 
 //Abstract super class for all file operations
-public abstract class FileUtil {
+public class FileUtil {
     protected File srcPath = null;
     protected File destPath = null;
     protected String optionnal = null;
@@ -17,9 +18,21 @@ public abstract class FileUtil {
     protected static final String FILESOURCE = "source file";
     protected static final String DESTSOURCE = "destination file";
 
+    private Countable countable;
+
     public FileUtil(){
         arguments = null;
     }
+
+    public FileUtil(Administrator admin, Countable countable){
+        VERBOSEMESSAGE = "This file contains %s words";
+        this.arguments = admin;
+        this.processArguments(1);
+
+        this.countable = countable;
+        
+    }
+
     public boolean isValid(){
         if (this.srcPath != null)
             return this.srcPath.canRead();
@@ -42,7 +55,9 @@ public abstract class FileUtil {
         }
     }
 
-    protected abstract InvalidArgumentUtil throwInvalidArgument();
+    protected InvalidArgumentUtil throwInvalidArgument(){
+        return new InvalidArgumentUtil("Invalid number of arguments", OPTIONS.HELP.usage(FILESOURCE));
+    }
 
     private void assignFileAttributes(){
         if(arguments.argumentSize() == 1){
@@ -71,7 +86,22 @@ public abstract class FileUtil {
             throw new InvalidArgumentUtil("Invalid operand", OPTIONS.HELP.usage(FILESOURCE));
     }
 
-    public abstract int execute() throws IOException;
+    public int execute() throws IOException{
+        if(!this.isValid())     return -1;
+
+        try{
+            this.execOptions();
+            countable.counter(srcPath);
+            this.counter = countable.getCounter();
+        }
+        catch(InvalidArgumentUtil e){
+            e.printError();
+        }
+        
+        Print.verbose(this.counter, VERBOSE, VERBOSEMESSAGE, srcPath);
+
+        return this.counter;
+    }
     
     public int getCounter(){
         return this.counter;

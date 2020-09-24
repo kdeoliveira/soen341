@@ -14,21 +14,25 @@ public class WC extends FileUtil{
         super.processArguments(NUMBER_ARGUMENTS);    
     }
 
+    @Override
     public int execute() throws IOException{
         if(!this.isValid())     return -1;
 
         try(CharacterCounter charCounter = new CharacterCounter(srcPath);
             KeywordCounter keywordCounter = new KeywordCounter(srcPath);
+            SequenceCounter sequenceCounter = new SequenceCounter(srcPath);
         ){
             this.execOptions();
             if(VERBOSE){
                 charCounter.counter('c');
                 keywordCounter.counter('w');
+                sequenceCounter.counter('l');
                 Print.newline();
             }
             else{
                 charCounter.counter();
                 keywordCounter.counter();
+                sequenceCounter.counter();
             }
             this.counter = charCounter.getCounter() + keywordCounter.getCounter();
         }

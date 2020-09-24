@@ -38,7 +38,5 @@ public class WordCount extends FileUtil{
     public static WordCount wordcount(Administrator args){
         return new WordCount(args);
     }
-    protected InvalidArgumentUtil throwInvalidArgument(){
-        return new InvalidArgumentUtil("Invalid number of arguments", OPTIONS.HELP.usage(FILESOURCE));
-    }
+    
 }

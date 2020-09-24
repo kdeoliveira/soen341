@@ -5,9 +5,12 @@ public class SequenceCounter extends DataCounter{
     public SequenceCounter(File file) throws IOException{
         super(file);
     }
+    public SequenceCounter() throws IOException{
+        super();
+    }
 
 
-    protected void count() throws IOException{
+    public void counter() throws IOException{
         int ch = file.read();
         if(ch == EOF)                  return;
 
@@ -16,7 +19,7 @@ public class SequenceCounter extends DataCounter{
             System.out.print(outputChar);
         }
         
-        this.count();
+        this.counter();
     }
     
 }
