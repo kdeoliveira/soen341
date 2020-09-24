@@ -1,76 +1,87 @@
 package file_manipulation;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.*;
 
 import file_manipulation.exception.InvalidArgumentUtil;
-import file_manipulation.exception.InvalidFileUtil;
 
 //Abstract super class for all file operations
 public abstract class FileUtil {
-    protected Path srcPath = null;
-    protected Path destPath = null;
+    protected File srcPath = null;
+    protected File destPath = null;
     protected String optionnal = null;
+    protected boolean VERBOSE = false;
+    protected String VERBOSEMESSAGE = null;
     protected Arguments arguments;
     protected int counter = 0;
 
+    protected static final String FILESOURCE = "source file";
+    protected static final String DESTSOURCE = "destination file";
+
     public FileUtil(){
-        optionnal = null;
         arguments = null;
     }
-    // Verify if input file is valid -> Can be overriden
-    public boolean isValid() throws InvalidFileUtil{
-        if (this.srcPath != null && !Files.isReadable(this.srcPath))
-            throw new InvalidFileUtil();
+    public boolean isValid(){
+        if (this.srcPath != null)
+            return this.srcPath.canRead();
         
-        return true;
+        return false;
     }
 
     // Parse arguments 
     protected void processArguments(int numberOfArguments){
+        optionnal = arguments.getOptions();
        try{
-            optionnal = arguments.getOptions();
+            if(arguments.isValid(1, numberOfArguments))
+                this.assignFileAttributes();
+            else
+                throw this.throwInvalidArgument();
 
-            if(!arguments.isValid() || (arguments.argumentSize() != numberOfArguments && arguments.argumentSize() != 0)){
-                throw new InvalidArgumentUtil();
-            }
-
-            if(arguments.argumentSize() == 1){
-                srcPath = Paths.get(arguments.getArguments().get(0)).toAbsolutePath();
-            }
-            if(arguments.argumentSize() == 2){
-                srcPath = Paths.get(arguments.getArguments().get(0)).toAbsolutePath();
-                destPath = Paths.get(arguments.getArguments().get(1)).toAbsolutePath();
-            }
         }
         catch(InvalidArgumentUtil iau){
             iau.printError();
         }
     }
 
-    protected abstract void options() throws InvalidArgumentUtil;
-    public abstract int execute();
+    protected abstract InvalidArgumentUtil throwInvalidArgument();
+
+    private void assignFileAttributes(){
+        if(arguments.argumentSize() == 1){
+            srcPath = new File(arguments.getArguments().get(0));
+        }
+        if(arguments.argumentSize() == 2){
+            srcPath = new File(arguments.getArguments().get(0));
+            destPath = new File(arguments.getArguments().get(1));
+        }
+    }
+
+    protected void execOptions() throws InvalidArgumentUtil{  
+        if(optionnal == null)    
+            return;
+    
+        if(OPTIONS.HELP.contains(optionnal))
+            OPTIONS.HELP.printHelper(FILESOURCE);
+        
+        else if(OPTIONS.BANNER.contains(optionnal))
+            OPTIONS.BANNER.printBanner(this.getClass().getName());
+
+        else if(OPTIONS.VERBOSE.contains(optionnal))
+            this.VERBOSE = true;
+    
+        else
+            throw new InvalidArgumentUtil("Invalid operand", OPTIONS.HELP.usage(FILESOURCE));
+    }
+
+    public abstract int execute() throws IOException;
     
     public int getCounter(){
         return this.counter;
     }
 
-    // public static Object subclass(Object o){
-    //     Method mt;
-    //     Object obj = null;
-    //     Class <?> subclass = FileUtil.class.getClass();
-    //     try{
-    //         mt = subclass.getMethod("execute");
-    //         obj = mt.invoke(o);
-    //     }
-    //     catch(Exception nmt){
-    //         nmt.printStackTrace();
-    //     }
-
-    //     return obj;
+    public void setVerboseMessage(String str){
+        CharSequence sformat = "%s";
         
-    // }
-
-
+        if(str.contains(sformat))
+            this.VERBOSEMESSAGE = str;
+        
+    }
 }

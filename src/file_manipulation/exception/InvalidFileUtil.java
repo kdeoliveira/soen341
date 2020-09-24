@@ -1,5 +1,6 @@
 package file_manipulation.exception;
 
+import file_manipulation.Print;
 
 public class InvalidFileUtil extends Exception{
     private static final long serialVersionUID = 1L;
@@ -21,7 +22,6 @@ public class InvalidFileUtil extends Exception{
     }
 
     public void printError(){
-        System.out.println(this.toString());
-        System.exit(-1);
+        Print.exit(this.toString());
     }
 }

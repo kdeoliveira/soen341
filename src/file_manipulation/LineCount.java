@@ -1,10 +1,8 @@
 package file_manipulation;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.util.List;
 
-import file_manipulation.exception.InvalidFileUtil;
+import file_manipulation.counter.SequenceCounter;
 import file_manipulation.exception.InvalidArgumentUtil;
 
 public class LineCount extends FileUtil {
@@ -15,48 +13,36 @@ public class LineCount extends FileUtil {
     }
 
     public LineCount(Arguments arguments){
+        VERBOSEMESSAGE = "This file contains %s lines";
         this.arguments = arguments;
         super.processArguments(NUMBER_ARGUMENTS);
     }
 
-    protected void options() throws InvalidArgumentUtil{
-        if(optionnal == null)
-            return;
-        if(optionnal.equals("-h") || optionnal.equals("-?") || optionnal.equals("--help")){
-            System.out.println("Usage: <options> <src file>");
-            System.exit(0);
-        }
-        else{
-            throw new InvalidArgumentUtil("Invalid operand");
-        }
-    }
 
-    public int execute(){
-        try{
-            if(!super.isValid())
-                return -1;
-            this.options();
+
+    public int execute() throws IOException{
+        if(!this.isValid())     return -1;
+
+        try(SequenceCounter lineCounter = new SequenceCounter(srcPath)){
+            this.execOptions();
+            lineCounter.counter();
+            this.counter = lineCounter.getCounter();
         }
-        catch(InvalidArgumentUtil iau){
-            iau.printError();
-        }
-        catch(InvalidFileUtil ifu){
-            ifu.printError();
+        catch(InvalidArgumentUtil e){
+            e.printError();
         }
         
-
-        try{
-            List<String> data = Files.readAllLines(this.srcPath);
-            this.counter = data.size();           
-        }
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        System.out.printf("This file contains %s lines %n", this.counter);
+        Print.verbose(this.counter, VERBOSE, VERBOSEMESSAGE, srcPath);
+        
         return this.counter;
     }
+
+
     public static LineCount linecount(Arguments args){
         return new LineCount(args);
+    }
+    protected InvalidArgumentUtil throwInvalidArgument(){
+        return new InvalidArgumentUtil("Invalid number of arguments", OPTIONS.HELP.usage(FILESOURCE));
     }
 
 }

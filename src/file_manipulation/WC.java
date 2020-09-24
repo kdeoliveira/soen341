@@ -1,25 +1,44 @@
 package file_manipulation;
+import java.io.*;
 
-public class WC{
+import file_manipulation.exception.*;
+import file_manipulation.counter.*;
 
-    private Arguments arguments;
+public class WC extends FileUtil{
+    private static final int NUMBER_ARGUMENTS = 1;
 
     public WC(){
-        this.arguments = null;
+        super();
     }
 
     public WC(Arguments args){
         this.arguments = args;
+        VERBOSEMESSAGE = "This file contains %s characters";
+        super.processArguments(NUMBER_ARGUMENTS);    
     }
 
-    public int linecount(){
-        return LineCount.linecount(arguments).execute();
+    public int execute() throws IOException{
+        if(!this.isValid())     return -1;
+
+        try(CharacterCounter charCounter = new CharacterCounter(srcPath);
+            KeywordCounter keywordCounter = new KeywordCounter(srcPath);
+        ){
+            this.execOptions();
+            charCounter.counter('c');
+            keywordCounter.counter('w');
+            this.counter = charCounter.getCounter();
+        }
+        catch(InvalidArgumentUtil e){
+            e.printError();
+        }
+        Print.newline();
+        Print.verbose(this.counter, VERBOSE, VERBOSEMESSAGE, srcPath);
+
+        return this.counter;
     }
-    public int charcount(){
-        return CharCount.charcount(arguments).execute();
-    }
-    public int wordcount(){
-        return WordCount.wordcount(arguments).execute();
+
+    protected InvalidArgumentUtil throwInvalidArgument(){
+        return new InvalidArgumentUtil("Invalid number of arguments", OPTIONS.HELP.usage(FILESOURCE));
     }
 
 }

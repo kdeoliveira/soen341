@@ -1,10 +1,9 @@
 package file_manipulation;
 
 import java.io.*;
-import java.nio.file.Files;
 
-import file_manipulation.exception.InvalidFileUtil;
-import file_manipulation.exception.InvalidArgumentUtil;
+import file_manipulation.exception.*;
+import file_manipulation.counter.*;
 
 
 public class CharCount extends FileUtil{
@@ -16,58 +15,33 @@ public class CharCount extends FileUtil{
 
     public CharCount(Arguments arguments){
         this.arguments = arguments;
+        VERBOSEMESSAGE = "This file contains %s characters";
         super.processArguments(NUMBER_ARGUMENTS);
     }
 
-    protected void options() throws InvalidArgumentUtil{
-        if(optionnal == null)
-            return;
-        if(optionnal.equals("-h") || optionnal.equals("-?") || optionnal.equals("--help")){
-            System.out.println("Usage: <options> <src file>");
-            System.exit(0);
-        }
-        else{
-            throw new InvalidArgumentUtil("Invalid operand");
-        }
-    }
-    public int execute(){
-        try{
-            if(!super.isValid())
-                return -1;
-            this.options();
-        }
-        catch(InvalidArgumentUtil iau){
-            iau.printError();
-        }
-        catch(InvalidFileUtil ifu){
-            ifu.printError();
-        }
-        
+    public int execute() throws IOException{
+        if(!this.isValid())     return -1;
 
-        char c;
-        try{
-            byte[] data = Files.readAllBytes(this.srcPath);
-            if(data.length == 0)
-                throw new IOException("File is empty");
-
-            for(byte x : data){
-                c = (char) x;
-                if(c != '\n')
-                    this.counter++;
-            }
-
-            
+        try(CharacterCounter charCounter = new CharacterCounter(srcPath)){
+            this.execOptions();
+            charCounter.counter();
+            this.counter = charCounter.getCounter();
         }
-        catch(IOException e){
-            e.printStackTrace();
+        catch(InvalidArgumentUtil e){
+            e.printError();
         }
-        
-        System.out.printf("This file contains %s characters %n", this.counter);
+        Print.verbose(this.counter, VERBOSE, VERBOSEMESSAGE, srcPath);
+
         return this.counter;
     }
 
     public static CharCount charcount(Arguments args){
         return new CharCount(args);
     }
+
+    protected InvalidArgumentUtil throwInvalidArgument(){
+        return new InvalidArgumentUtil("Invalid number of arguments", OPTIONS.HELP.usage(FILESOURCE));
+    }
+
 
 }

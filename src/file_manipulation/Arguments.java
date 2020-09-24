@@ -1,64 +1,48 @@
 package file_manipulation;
+
 import java.util.*;
 
 import file_manipulation.exception.InvalidArgumentUtil;
 
 public class Arguments {
     private List<String> argsName;
-    String optionnal;
+    String optionnal = null;
     private int argsSize;
 
-    public Arguments(String args[]){
-        argsName = new ArrayList<>(Arrays.asList(args));
+
+    public Arguments(String[] arg){
+        argsName = new ArrayList<>(Arrays.asList(arg));
         argsSize = argsName.size();
         this.options();
     }
 
     private void options(){
-
-        optionnal = argsName.stream().filter(
-            x -> x.startsWith("-")
-        ).findFirst()
-        .orElse(null);
-
-        if(optionnal != null)
-            argsName.remove(optionnal);
+       if(!argsName.isEmpty() && argsName.get(0).startsWith("-")){
+            optionnal = argsName.remove(0);
+            argsSize--;
+       }
     }
 
-    public String getOptions() throws InvalidArgumentUtil{
-        if(!this.isValid())
-            return null;
+    public String getOptions(){
         return optionnal;
     }
 
-    public List<String> getArguments() throws InvalidArgumentUtil{
-        if(!this.isValid())
-            return Collections.emptyList();
-
+    public List<String> getArguments(){
         return argsName;
     }
 
-    public boolean isValid() throws InvalidArgumentUtil{
-        if(argsSize < 1)
+    public boolean isValid(int minSize, int maxSize) throws InvalidArgumentUtil{
+        if(argsSize < minSize)
             throw new InvalidArgumentUtil("missing operand");
 
-        if(argsSize > 2)
-            return optionnal != null;
-
-        return true;
-    }
-    
-    public boolean isValid(int maxSize){
-        if(argsSize < 1)
-            return false;
-
-        if(argsSize > maxSize)
-            return optionnal != null;
-
-        return true;
+        return argsSize == maxSize;
     }
 
     public int argumentSize(){
-        return argsName.size();
+        return argsSize;
+    }
+
+    public void exit(){
+        System.exit(0);
     }
 }
