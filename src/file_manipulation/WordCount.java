@@ -10,10 +10,6 @@ public class WordCount extends FileUtil{
     //Count number of arguments allowed
     private static final int NUMBER_ARGUMENTS = 1;
 
-    public WordCount(){
-        super();
-    }
-
     public WordCount(Arguments arguments){
         VERBOSEMESSAGE = "This file contains %s words";
         this.arguments = arguments;

@@ -8,10 +8,6 @@ import file_manipulation.exception.InvalidArgumentUtil;
 public class LineCount extends FileUtil {
     private static final int NUMBER_ARGUMENTS = 1;
 
-    public LineCount(){
-        super();
-    }
-
     public LineCount(Arguments arguments){
         VERBOSEMESSAGE = "This file contains %s lines";
         this.arguments = arguments;

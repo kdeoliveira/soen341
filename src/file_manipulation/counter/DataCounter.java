@@ -29,6 +29,7 @@ public abstract class DataCounter implements AutoCloseable, Countable{
         count();
     }
     public void counter() throws IOException{
+        this.outputChar = NONE;
         count();
     }
 

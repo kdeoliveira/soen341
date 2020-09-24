@@ -9,9 +9,6 @@ import file_manipulation.counter.*;
 public class CharCount extends FileUtil{
     private static final int NUMBER_ARGUMENTS = 1;
 
-    public CharCount(){
-        super();
-    }
 
     public CharCount(Arguments arguments){
         this.arguments = arguments;
@@ -42,6 +39,4 @@ public class CharCount extends FileUtil{
     protected InvalidArgumentUtil throwInvalidArgument(){
         return new InvalidArgumentUtil("Invalid number of arguments", OPTIONS.HELP.usage(FILESOURCE));
     }
-
-
 }
