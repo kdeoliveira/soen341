@@ -10,7 +10,7 @@ public class CharCount extends FileUtil{
     private static final int NUMBER_ARGUMENTS = 1;
 
 
-    public CharCount(Arguments arguments){
+    public CharCount(Administrator arguments){
         this.arguments = arguments;
         VERBOSEMESSAGE = "This file contains %s characters";
         super.processArguments(NUMBER_ARGUMENTS);
@@ -32,7 +32,7 @@ public class CharCount extends FileUtil{
         return this.counter;
     }
 
-    public static CharCount charcount(Arguments args){
+    public static CharCount charcount(Administrator args){
         return new CharCount(args);
     }
 

@@ -12,7 +12,7 @@ public class Copy extends FileUtil{
         super();
     }
 
-    public Copy(Arguments arguments){
+    public Copy(Administrator arguments){
         VERBOSEMESSAGE = "This file %s has been successfully copied";
         this.arguments = arguments;
         super.processArguments(NUMBER_ARGUMENTS);
@@ -62,7 +62,7 @@ public class Copy extends FileUtil{
         return 0;
     }
 
-    public static Copy copy(Arguments args){
+    public static Copy copy(Administrator args){
         return new Copy(args);
     }
     protected InvalidArgumentUtil throwInvalidArgument(){

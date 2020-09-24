@@ -8,7 +8,7 @@ import file_manipulation.exception.InvalidArgumentUtil;
 public class LineCount extends FileUtil {
     private static final int NUMBER_ARGUMENTS = 1;
 
-    public LineCount(Arguments arguments){
+    public LineCount(Administrator arguments){
         VERBOSEMESSAGE = "This file contains %s lines";
         this.arguments = arguments;
         super.processArguments(NUMBER_ARGUMENTS);
@@ -34,7 +34,7 @@ public class LineCount extends FileUtil {
     }
 
 
-    public static LineCount linecount(Arguments args){
+    public static LineCount linecount(Administrator args){
         return new LineCount(args);
     }
     protected InvalidArgumentUtil throwInvalidArgument(){

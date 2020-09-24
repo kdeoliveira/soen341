@@ -10,7 +10,7 @@ public class WordCount extends FileUtil{
     //Count number of arguments allowed
     private static final int NUMBER_ARGUMENTS = 1;
 
-    public WordCount(Arguments arguments){
+    public WordCount(Administrator arguments){
         VERBOSEMESSAGE = "This file contains %s words";
         this.arguments = arguments;
         super.processArguments(NUMBER_ARGUMENTS);
@@ -35,7 +35,7 @@ public class WordCount extends FileUtil{
     }
 
     //Static reference to class
-    public static WordCount wordcount(Arguments args){
+    public static WordCount wordcount(Administrator args){
         return new WordCount(args);
     }
     protected InvalidArgumentUtil throwInvalidArgument(){

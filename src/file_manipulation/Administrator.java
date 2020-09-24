@@ -4,13 +4,13 @@ import java.util.*;
 
 import file_manipulation.exception.InvalidArgumentUtil;
 
-public class Arguments {
+public class Administrator {
     private List<String> argsName;
     String optionnal = null;
     private int argsSize;
 
 
-    public Arguments(String[] arg){
+    public Administrator(String[] arg){
         argsName = new ArrayList<>(Arrays.asList(arg));
         argsSize = argsName.size();
         this.options();

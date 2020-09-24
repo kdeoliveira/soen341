@@ -8,7 +8,7 @@ import file_manipulation.counter.*;
 public class WC extends FileUtil{
     private static final int NUMBER_ARGUMENTS = 1;
 
-    public WC(Arguments args){
+    public WC(Administrator args){
         this.arguments = args;
         VERBOSEMESSAGE = "This file contains %s characters and words";
         super.processArguments(NUMBER_ARGUMENTS);    

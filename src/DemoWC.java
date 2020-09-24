@@ -5,7 +5,7 @@ import file_manipulation.*;
 
 public class DemoWC {
     public static void main(String[] args){
-        Arguments ar = new Arguments(args);
+        Administrator ar = new Administrator(args);
 
         WC wordcount = new WC(ar);
 

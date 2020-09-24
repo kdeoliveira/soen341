@@ -11,7 +11,7 @@ public abstract class FileUtil {
     protected String optionnal = null;
     protected boolean VERBOSE = false;
     protected String VERBOSEMESSAGE = null;
-    protected Arguments arguments;
+    protected Administrator arguments;
     protected int counter = 0;
 
     protected static final String FILESOURCE = "source file";

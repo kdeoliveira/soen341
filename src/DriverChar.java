@@ -8,7 +8,7 @@ public class DriverChar {
 
         System.out.println(System.getProperty("os.name"));
 
-        Arguments ar = new Arguments(args);
+        Administrator ar = new Administrator(args);
 
         CharCount cc = new CharCount(ar);
 
@@ -18,8 +18,6 @@ public class DriverChar {
         catch(IOException e){
             e.printStackTrace();
         }
-
-
         
     }
 }
