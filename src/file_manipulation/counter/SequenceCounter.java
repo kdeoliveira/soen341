@@ -2,15 +2,19 @@ package file_manipulation.counter;
 import java.io.*;
 
 public class SequenceCounter extends DataCounter{
-    public SequenceCounter(File file) throws IOException{
-        super(file);
-    }
-    public SequenceCounter() throws IOException{
+
+    public SequenceCounter(){
         super();
+        VERBOSEMESSAGE = "The file contains %s lines";
     }
 
+    public SequenceCounter(char character){
+        super(character);
+        VERBOSEMESSAGE = "The file contains %s lines";        
+    }
 
-    public void counter() throws IOException{
+    @Override
+    public void count() throws IOException{
         int ch = file.read();
         if(ch == EOF)                  return;
 
@@ -19,7 +23,7 @@ public class SequenceCounter extends DataCounter{
             System.out.print(outputChar);
         }
         
-        this.counter();
+        this.count();
     }
     
 }

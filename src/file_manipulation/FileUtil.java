@@ -3,6 +3,7 @@ package file_manipulation;
 import java.io.*;
 
 import file_manipulation.counter.Countable;
+import file_manipulation.counter.DataCounter;
 import file_manipulation.exception.InvalidArgumentUtil;
 
 //Abstract super class for all file operations
@@ -18,14 +19,13 @@ public class FileUtil {
     protected static final String FILESOURCE = "source file";
     protected static final String DESTSOURCE = "destination file";
 
-    private Countable countable;
+    private DataCounter countable;
 
     public FileUtil(){
         arguments = null;
     }
 
-    public FileUtil(Administrator admin, Countable countable){
-        VERBOSEMESSAGE = "This file contains %s words";
+    public FileUtil(Administrator admin, DataCounter countable){
         this.arguments = admin;
         this.processArguments(1);
 
@@ -86,6 +86,10 @@ public class FileUtil {
             throw new InvalidArgumentUtil("Invalid operand", OPTIONS.HELP.usage(FILESOURCE));
     }
 
+
+
+
+
     public int execute() throws IOException{
         if(!this.isValid())     return -1;
 
@@ -98,14 +102,11 @@ public class FileUtil {
             e.printError();
         }
         
-        Print.verbose(this.counter, VERBOSE, VERBOSEMESSAGE, srcPath);
+        Print.verbose(this.counter, VERBOSE, countable.getVerbose(), srcPath);
 
         return this.counter;
     }
-    
-    public int getCounter(){
-        return this.counter;
-    }
+
 
     public void setVerboseMessage(String str){
         CharSequence sformat = "%s";
