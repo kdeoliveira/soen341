@@ -1,21 +1,21 @@
 import java.io.IOException;
 
-
 import file_manipulation.*;
+import file_manipulation.counter.CharacterCounter;
+import file_manipulation.counter.DataCounter;
 
 public class DriverChar {
-    public static void main(String[] args){
-
+    public static void main(String[] args) {
         Administrator ar = new Administrator(args);
 
-        CharCount cc = new CharCount(ar);
+        DataCounter data = new CharacterCounter();
+        FileUtil wordcount = new FileUtil(ar, data);
 
         try{
-            cc.execute();
+            wordcount.execute();
         }
-        catch(IOException e){
+        catch(IOException | NoSuchMethodException e) {
             e.printStackTrace();
         }
-        
     }
 }

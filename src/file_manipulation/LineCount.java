@@ -1,44 +1,36 @@
 package file_manipulation;
 
-import java.io.*;
-
-import file_manipulation.counter.SequenceCounter;
-import file_manipulation.exception.InvalidArgumentUtil;
 
 public class LineCount extends FileUtil {
-    private static final int NUMBER_ARGUMENTS = 1;
 
-    public LineCount(Administrator arguments){
-        VERBOSEMESSAGE = "This file contains %s lines";
-        this.arguments = arguments;
-        super.processArguments(NUMBER_ARGUMENTS);
-    }
+    // public LineCount(Administrator arguments){
+    //     super(arguments);
+    // }
 
 
+    // public int execute() throws IOException{
+    //     if(!this.isValid())     return -1;
 
-    public int execute() throws IOException{
-        if(!this.isValid())     return -1;
+    //     try(DataCounter data = new SequenceCounter(srcPath)){
+    //         this.execOptions();
+    //         data.counter();
+    //         this.counter = data.getCounter();
 
-        try(SequenceCounter lineCounter = new SequenceCounter(srcPath)){
-            this.execOptions();
-            lineCounter.counter();
-            this.counter = lineCounter.getCounter();
-        }
-        catch(InvalidArgumentUtil e){
-            e.printError();
-        }
-        
-        Print.verbose(this.counter, VERBOSE, VERBOSEMESSAGE, srcPath);
-        
-        return this.counter;
-    }
+    //         Print.verbose(data, VERBOSE, srcPath);
+    //     }
+    //     catch(InvalidArgumentUtil e){
+    //         e.printError();
+    //     }
+
+    //     return this.counter;
+    // }
 
 
-    public static LineCount linecount(Administrator args){
-        return new LineCount(args);
-    }
-    protected InvalidArgumentUtil throwInvalidArgument(){
-        return new InvalidArgumentUtil("Invalid number of arguments", OPTIONS.HELP.usage(FILESOURCE));
-    }
+    // public static LineCount linecount(Administrator args){
+    //     return new LineCount(args);
+    // }
+    // protected InvalidArgumentUtil throwInvalidArgument(){
+    //     return new InvalidArgumentUtil("Invalid number of arguments", OPTIONS.HELP.usage(FILESOURCE));
+    // }
 
 }

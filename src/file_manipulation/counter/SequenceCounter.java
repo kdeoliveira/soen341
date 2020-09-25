@@ -2,21 +2,32 @@ package file_manipulation.counter;
 import java.io.*;
 
 public class SequenceCounter extends DataCounter{
+
+    public SequenceCounter(){
+        super();
+    }
     public SequenceCounter(File file) throws IOException{
         super(file);
+        VERBOSEMESSAGE = "This file contains %s lines";
     }
 
 
     protected void count() throws IOException{
-        int ch = file.read();
-        if(ch == EOF)                  return;
+        int k = file.read();
+        if(k == EOF)                  return;
 
-        if((char) ch == NEWLINE)       {
+        if((char) k == NEWLINE)       {
             ++this.counter;
             System.out.print(outputChar);
         }
         
-        this.count();
+        count();
+    }
+
+    public static void main(String[] args) throws IOException {
+        try(SequenceCounter sc = new SequenceCounter(new File("ProjectA_Sprint#_40054907_KevindeOliveira/src/test.txt"))){
+            sc.counter();
+        }
     }
     
 }

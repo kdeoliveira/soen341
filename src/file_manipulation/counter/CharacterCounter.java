@@ -2,9 +2,14 @@ package file_manipulation.counter;
 import java.io.*;
 
 public class CharacterCounter extends DataCounter{
+
+    public CharacterCounter(){
+        super();
+    }
     
     public CharacterCounter(File file) throws IOException{
         super(file);
+        VERBOSEMESSAGE = "This file contains %s characters";
     }
 
     protected void count() throws IOException{

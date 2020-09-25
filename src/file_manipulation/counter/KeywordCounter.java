@@ -8,10 +8,14 @@ public class KeywordCounter extends DataCounter {
 
     public KeywordCounter(File file) throws IOException{
         super(file);
+        VERBOSEMESSAGE = "This file contains %s words";
     }
 
+    public KeywordCounter() {
+        super();
+	}
 
-    protected void count() throws IOException{
+	protected void count() throws IOException{
         int ch = file.read();
         if(ch == EOF)                  return;
 

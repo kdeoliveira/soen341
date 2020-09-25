@@ -1,18 +1,20 @@
 import java.io.IOException;
 
 import file_manipulation.*;
+import file_manipulation.counter.*;
 
 
 public class DriverWord {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Administrator ar = new Administrator(args);
 
-        WordCount wc = new WordCount(ar);
+        DataCounter data = new KeywordCounter();
+        FileUtil wordcount = new FileUtil(ar, data);
 
         try{
-            wc.execute();
+            wordcount.execute();
         }
-        catch(IOException e){
+        catch(IOException | NoSuchMethodException e) {
             e.printStackTrace();
         }
     }
