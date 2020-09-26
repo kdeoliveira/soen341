@@ -31,11 +31,6 @@ public class InvalidArgumentUtil extends Exception{
     }
 
     public void printError(){
-        Print.exit(this.message, this.arg);
+        Print.exit(this.toString(), this.arg);
     }
-
-
-
-
-
 }

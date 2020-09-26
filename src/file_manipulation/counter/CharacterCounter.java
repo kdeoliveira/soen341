@@ -1,5 +1,8 @@
 package file_manipulation.counter;
+
 import java.io.*;
+
+import file_manipulation.Print;
 
 public class CharacterCounter extends DataCounter{
 
@@ -18,7 +21,7 @@ public class CharacterCounter extends DataCounter{
 
         if((char) ch != NEWLINE)       {
             ++this.counter;
-            System.out.print(outputChar);
+            Print.character(outputChar);
         }
         
         this.count();

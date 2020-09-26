@@ -46,7 +46,7 @@ public class MixCounter extends DataCounter {
         if((char) ch != SPACE)       {
             if(!flagKeyword){
                 flagKeyword = true;
-                System.out.print(character1);
+                Print.character(character1);
                 return 1;
             }
         }
@@ -58,7 +58,7 @@ public class MixCounter extends DataCounter {
 
     private int countSequence(int ch){
         if((char) ch == NEWLINE)       {
-            System.out.print(character2);
+            Print.character(character2);
             return 1;
         }
         return 0;
@@ -66,7 +66,7 @@ public class MixCounter extends DataCounter {
 
     private int countCharacter(int ch){
         if((char) ch != NEWLINE)       {
-            System.out.print(character3);
+            Print.character(character3);
             return 1;
         }
 

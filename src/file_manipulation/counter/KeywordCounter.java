@@ -1,5 +1,8 @@
 package file_manipulation.counter;
+
 import java.io.*;
+
+import file_manipulation.Print;
 
 
 public class KeywordCounter extends DataCounter {
@@ -23,7 +26,7 @@ public class KeywordCounter extends DataCounter {
             if(!flagKeyword){
                 flagKeyword = true;
                 ++this.counter;
-                System.out.print(outputChar);
+                Print.character(outputChar);
             }
         }
         else{

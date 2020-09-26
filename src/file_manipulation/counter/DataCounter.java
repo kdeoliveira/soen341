@@ -59,15 +59,11 @@ public abstract class DataCounter implements Closeable, Countable{
     public void setVerboseMessage(String str){
         CharSequence sformat = "%s";
         
-        if(str.contains(sformat))
-            this.VERBOSEMESSAGE = str;
+        if(str.contains(sformat))       this.VERBOSEMESSAGE = str;
         
     }
 
     public void close() throws IOException{
             file.close();
-    }
-    public void test(){
-        System.out.println("Test for reflection super");
     }
 }

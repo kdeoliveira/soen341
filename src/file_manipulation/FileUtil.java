@@ -9,122 +9,87 @@ import file_manipulation.exception.InvalidArgumentUtil;
 
 //Abstract super class for all file operations
 public class FileUtil {
-    protected File srcPath = null;
-    protected File destPath = null;
-    protected String optionnal = null;
-    protected boolean VERBOSE = false;
+    protected File [] srcPath;
     protected Administrator arguments;
-    protected int counter = 0;
     private static final int NUMBER_ARGUMENTS = 1;
 
     private Class<? extends DataCounter> countable;
 
-    protected static final String FILESOURCE = "source file";
-    protected static final String DESTSOURCE = "destination file";
+    public FileUtil(Administrator admin, DataCounter data) {
+        this.arguments      = admin;
+        countable           = data.getClass();
+        srcPath             = new File[NUMBER_ARGUMENTS];
 
-
-    public FileUtil(){
-        arguments = null;
-        countable = null;
-    }
-
-    public FileUtil(Administrator admin, DataCounter data){
-        this.arguments = admin;
-        countable = data.getClass();
-        
         this.processArguments(NUMBER_ARGUMENTS);
     }
 
-    public FileUtil(Administrator admin, int numberArguments){
-        this.arguments = admin;
-        countable = null;
+    public FileUtil(Administrator admin, DataCounter data, int numberArguments){
+        this.arguments      = admin;
+        countable           = data.getClass();
+        srcPath             = new File[numberArguments];
+
         this.processArguments(numberArguments);
     }
 
-    public boolean isValid(){
-        if (this.srcPath != null)
-            return this.srcPath.canRead();
-        
-        return false;
+    public FileUtil(Administrator admin, int numberArguments){
+        this.arguments      = admin;
+        countable           = null;
+        srcPath             = new File[numberArguments];
+
+        this.processArguments(numberArguments);
     }
 
     // Parse arguments 
-    protected void processArguments(int numberOfArguments){
-        optionnal = arguments.getOptions();
+    private void processArguments(int numberOfArguments){
        try{
-            if(arguments.isValid(1, numberOfArguments))
-                this.assignFileAttributes();
-            else
-                throw this.throwInvalidArgument();
-
+            if(arguments.isValid(1, numberOfArguments))     this.assignFileAttributes();
+            else                                            throw this.throwInvalidArgument();
         }
         catch(InvalidArgumentUtil iau){
             iau.printError();
         }
     }
 
-    protected InvalidArgumentUtil throwInvalidArgument(){
-        return new InvalidArgumentUtil("Invalid number of arguments", OPTIONS.HELP.usage(FILESOURCE));
-    }
-
     private void assignFileAttributes(){
-        if(arguments.argumentSize() == 1){
-            srcPath = new File(arguments.getArguments().get(0));
-        }
-        if(arguments.argumentSize() == 2){
-            srcPath = new File(arguments.getArguments().get(0));
-            destPath = new File(arguments.getArguments().get(1));
-        }
+        for(int i=0 ; i < arguments.argumentSize(); i++)
+            srcPath[i] = new File(arguments.getArguments().get(i));
     }
 
-    protected void execOptions() throws InvalidArgumentUtil{  
-        if(optionnal == null)    
-            return;
-    
-        if(OPTIONS.HELP.contains(optionnal))
-            OPTIONS.HELP.printHelper(FILESOURCE);
-        
-        else if(OPTIONS.BANNER.contains(optionnal))
-            OPTIONS.BANNER.printBanner(this.getClass().getName());
-
-        else if(OPTIONS.VERBOSE.contains(optionnal))
-            this.VERBOSE = true;
-    
-        else
-            throw new InvalidArgumentUtil("Invalid operand", OPTIONS.HELP.usage(FILESOURCE));
+    public boolean isFileValid(){
+        if (this.srcPath[0] != null)    return this.srcPath[0].canRead();
+        return false;
     }
 
-    public int execute() throws IOException, NoSuchMethodException{
-        if(!this.isValid())     return -1;
+    public boolean execute() throws IOException, NoSuchMethodException{
+        if(!this.isFileValid())             return false;
 
         Constructor<? extends DataCounter> countConstructor = countable
                 .getDeclaredConstructor(File.class);
 
-        try(DataCounter data = countConstructor.newInstance(srcPath)){
-            this.execOptions();
+        try(DataCounter data = countConstructor.newInstance(srcPath[0])){
+            arguments.execOptions(countable, Print.FILESOURCE);
+            boolean verbose = arguments.getVerbose();
+
             if(data.getClass().getName() == MixCounter.class.getName()){
-                if(VERBOSE)
-                    data.counter('w', 'l', 'c');
-                else
-                    data.counter();
-                Print.verboseMix((MixCounter)data, VERBOSE, srcPath);
+                if(verbose)     data.counter('w', 'l', 'c');
+                else            data.counter();
+
+                Print.verboseMix((MixCounter)data, verbose, srcPath[0]);
             }
             else{
                 data.counter();
-                Print.verbose(data, VERBOSE, srcPath);
+                Print.verbose(data, verbose, srcPath[0]);
             }
                 
-            this.counter = data.getCounter();
-
         }
         catch(Exception e){
             throw new IOException();
         }
-        return this.counter;
+        return true;
     }
-    
-    public int getCounter(){
-        return this.counter;
+
+    protected InvalidArgumentUtil throwInvalidArgument(){
+        return new InvalidArgumentUtil("Invalid number of arguments", OPTIONS.HELP.usage(Print.FILESOURCE));
     }
 
 }

@@ -14,6 +14,9 @@ public final class Print {
     public static final String ANSI_RED;
     public static final String ANSI_YELLOW;
     public static final String ANSI_BLUE;
+    public static final String FILESOURCE = "source file";
+    public static final String DESTSOURCE = "destination file";
+
     static{
         output = new PrintWriter(new OutputStreamWriter(System.out, StandardCharsets.UTF_8), true);
         if(!System.getProperty("os.name").equals("windows")){
