@@ -13,6 +13,7 @@ public class SequenceCounter extends DataCounter{
         VERBOSEMESSAGE = "This file contains %s lines";
     }
 
+    // Recursive counter of each new line 
     protected void count() throws IOException{
         int k = file.read();
         if(k == EOF)                  return;

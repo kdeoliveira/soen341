@@ -39,7 +39,7 @@ public class FileUtil {
         this.processArguments(numberArguments);
     }
 
-    // Parse arguments 
+    // Parse arguments based on number of allowed arguments
     private void processArguments(int numberOfArguments){
        try{
             if(arguments.isValid(1, numberOfArguments))     this.assignFileAttributes();
@@ -50,6 +50,7 @@ public class FileUtil {
         }
     }
 
+    // Assign files for each string on argument
     private void assignFileAttributes(){
         for(int i=0 ; i < arguments.argumentSize(); i++)
             srcPath[i] = new File(arguments.getArguments().get(i));
@@ -60,9 +61,10 @@ public class FileUtil {
         return false;
     }
 
+    // Execute action based on arguments and Counter provided
     public boolean execute() throws IOException, NoSuchMethodException{
         if(!this.isFileValid())             return false;
-
+        // Invoke constructor of Counter
         Constructor<? extends DataCounter> countConstructor = countable
                 .getDeclaredConstructor(File.class);
 

@@ -16,8 +16,9 @@ public class KeywordCounter extends DataCounter {
 
     public KeywordCounter() {
         super();
-	}
-
+    }
+    
+    // Recursive counter for each keyword found between spaces
 	protected void count() throws IOException{
         int ch = file.read();
         if(ch == EOF)                  return;

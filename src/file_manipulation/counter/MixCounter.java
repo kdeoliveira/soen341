@@ -22,6 +22,7 @@ public class MixCounter extends DataCounter {
         VERBOSEMESSAGE = "This file contains %s characters, %s words and %s lines";
     }
 
+    //Output characters per new character/line found
     @Override
     public void counter(char character1, char character2, char character3) throws IOException{
         this.character1 = character1;

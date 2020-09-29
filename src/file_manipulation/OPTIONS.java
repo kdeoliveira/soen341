@@ -1,5 +1,6 @@
 package file_manipulation;
 
+//Provides options values and methods for command line
 public enum OPTIONS{
     HELP("-h", "-?", "-help"), VERBOSE("-v", "-verbose"), BANNER("-b", "-banner");
 
@@ -24,29 +25,29 @@ public enum OPTIONS{
         this.opt3 = opt3;
     }
 
-
+    //Verify if string contains a specific option
     public boolean contains(String str){
         try{
             return this.opt1.equals(str) || this.opt2.equals(str) || this.opt3.equals(str);
         }
+        //Verifies if str is null
         catch(NullPointerException npe){
             return false;
         }
-        
     }
 
     public String getOpt1(){
         return this.opt1;
     }
-
+    //Return help output given a string
     public String usage(String str){
         return String.format("usage: [%s] [%s] [%s] <%s>", HELP.opt1, VERBOSE.opt1, BANNER.opt1, str );
     }
-
+    //Return help output given two string
     public String usage(String str1, String str2){
         return String.format("usage: [%s] [%s] [%s] <%s> <%s>", this.opt1, this.opt2, this.opt3, str1, str2 );
     }
-
+    //Return banner output given a string
     public String banner(String str){
         return String.format("%s Version 1.0 \n"+
                             "Copyright (C) Concordia 2020. All Rights Reserved\n"+

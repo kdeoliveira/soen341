@@ -7,7 +7,29 @@ import file_manipulation.counter.DataCounter;
 import file_manipulation.counter.MixCounter;
 
 import java.io.*;
-
+/**
+ *  The {@code Print} class provides static methods for reading strings
+ *  and characters
+ *  <b>Reading a sequence of values of the same type from standard input.</b>
+ *  <p>
+ *  <ul>
+ *  <li> {@link #verbose()}
+ *  <li> {@link #line()}
+ *  <li> {@link #character()}
+ *  <li> {@link #newline()}
+ *  <li> {@link #exit()}
+ *  </ul>
+ *  <p>
+ *  It is also possible to print the verbose description of a file utility
+ *  command according to message.
+ *  The specified type, as in the corresponding
+ *  {@code newline()}, {@code character()}, and {@code exit()} methods.
+ *  The {@code line()} method reads all remaining lines on standard
+ *  input and returns them as an array of strings.
+ *  The {@code getOutput()} method returns the PrinterWriter class itself.
+ *  <p>
+ *  @author Kevin de Oliveira
+ */
 public final class Print {
     private static PrintWriter output;
     public static final String ANSI_RESET;

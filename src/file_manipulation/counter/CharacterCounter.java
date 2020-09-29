@@ -14,7 +14,7 @@ public class CharacterCounter extends DataCounter{
         super(file);
         VERBOSEMESSAGE = "This file contains %s characters";
     }
-
+    // Recursive counter of each charactere, except new line 
     protected void count() throws IOException{
         int ch = file.read();
         if(ch == EOF)                  return;

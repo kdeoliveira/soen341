@@ -40,6 +40,7 @@ public abstract class DataCounter implements Closeable, Countable{
 
     protected abstract void count() throws IOException;
 
+    //Cannot be used with base class or subclass that did not implement it
     public void counter(char character1, char character2, char character3) throws IOException{
         throw new UnsupportedOperationException();
     }
