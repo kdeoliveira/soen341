@@ -42,7 +42,7 @@ public class FileUtil {
     // Parse arguments based on number of allowed arguments
     private void processArguments(int numberOfArguments){
        try{
-            if(arguments.isValid(1, numberOfArguments))     this.assignFileAttributes();
+            if(arguments.isValid(0, numberOfArguments))     this.assignFileAttributes();
             else                                            throw this.throwInvalidArgument();
         }
         catch(InvalidArgumentUtil iau){
@@ -63,13 +63,19 @@ public class FileUtil {
 
     // Execute action based on arguments and Counter provided
     public boolean execute() throws IOException, NoSuchMethodException{
-        if(!this.isFileValid())             return false;
+        try{
+            arguments.execOptions(countable, Print.FILESOURCE);
+            if(!this.isFileValid())    throw new InvalidArgumentUtil("Invalid source file");
+        }
+        catch(InvalidArgumentUtil e){
+            e.printError();
+        }
+        
         // Invoke constructor of Counter
         Constructor<? extends DataCounter> countConstructor = countable
                 .getDeclaredConstructor(File.class);
 
         try(DataCounter data = countConstructor.newInstance(srcPath[0])){
-            arguments.execOptions(countable, Print.FILESOURCE);
             boolean verbose = arguments.getVerbose();
 
             if(data.getClass().getName() == MixCounter.class.getName()){

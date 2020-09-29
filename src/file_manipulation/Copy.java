@@ -13,28 +13,30 @@ public class Copy extends FileUtil{
 
     @Override
     public boolean execute() throws IOException {
-        if(!this.isFileValid())     return false;
+        try{
+            arguments.execOptions(this.getClass(), Print.FILESOURCE, Print.DESTSOURCE);
+            //Checks if src file not valid
+            if(!this.isFileValid())    throw new InvalidArgumentUtil("Invalid source file");
+        }
+        catch(InvalidArgumentUtil e){
+            e.printError();
+
+        }
 
         try(FileInputStream source = new FileInputStream(srcPath[0]);
             FileOutputStream destination = new FileOutputStream(srcPath[1])){
-                arguments.execOptions(this.getClass(), Print.FILESOURCE, Print.DESTSOURCE);
                 boolean verbose = arguments.getVerbose();
                 int c;
 
                 while( (c = source.read()) != -1 ){
                     destination.write(c);
-                    if(verbose){
-                        Print.character('.');
-                    }
+                    if(verbose)         Print.character('.');
                 }
                 Print.newline();
                 Print.line("Copied successfully");
         }
-        catch(InvalidArgumentUtil e){
-            e.printError();
-        }
         catch(FileNotFoundException f404){
-            f404.printStackTrace(Print.getOutput());
+            throw new IOException("File not found");
         }
         return true;
     }

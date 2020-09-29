@@ -70,7 +70,7 @@ public class Administrator {
         if(argsSize < minSize)
             throw new InvalidArgumentUtil("missing operand");
 
-        return argsSize == maxSize;
+        return argsSize <= maxSize;
     }
 
     public int argumentSize(){
