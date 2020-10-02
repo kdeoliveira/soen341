@@ -7,9 +7,11 @@ public class SequenceCounter extends DataCounter{
 
     public SequenceCounter(){
         super();
+        this.counter = new int[1];
     }
     public SequenceCounter(File file) throws IOException{
         super(file);
+        this.counter = new int[1];
         VERBOSEMESSAGE = "This file contains %s lines";
     }
 
@@ -19,7 +21,7 @@ public class SequenceCounter extends DataCounter{
         if(k == EOF)                  return;
 
         if((char) k == NEWLINE)       {
-            ++this.counter;
+            this.counter[0] += 1;
             Print.character(outputChar);
         }
         

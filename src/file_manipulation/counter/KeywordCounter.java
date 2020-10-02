@@ -11,11 +11,13 @@ public class KeywordCounter extends DataCounter {
 
     public KeywordCounter(File file) throws IOException{
         super(file);
+        this.counter = new int[1];
         VERBOSEMESSAGE = "This file contains %s words";
     }
 
     public KeywordCounter() {
         super();
+        this.counter = new int[1];
     }
     
     // Recursive counter for each keyword found between spaces
@@ -26,7 +28,7 @@ public class KeywordCounter extends DataCounter {
         if((char) ch != SPACE)       {
             if(!flagKeyword){
                 flagKeyword = true;
-                ++this.counter;
+                this.counter[0] += 1;
                 Print.character(outputChar);
             }
         }

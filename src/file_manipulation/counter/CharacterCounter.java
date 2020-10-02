@@ -8,10 +8,12 @@ public class CharacterCounter extends DataCounter{
 
     public CharacterCounter(){
         super();
+        this.counter = new int[1];
     }
     
     public CharacterCounter(File file) throws IOException{
         super(file);
+        this.counter = new int[1];
         VERBOSEMESSAGE = "This file contains %s characters";
     }
     // Recursive counter of each charactere, except new line 
@@ -20,7 +22,7 @@ public class CharacterCounter extends DataCounter{
         if(ch == EOF)                  return;
 
         if((char) ch != NEWLINE)       {
-            ++this.counter;
+            this.counter[0] += 1;
             Print.character(outputChar);
         }
         

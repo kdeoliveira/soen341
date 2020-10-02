@@ -7,7 +7,8 @@ public class DemoWC {
     public static void main(String[] args) {
         Administrator ar = new Administrator(args);
 
-        DataCounter data = new MixCounter();
+        Countable data = new Wc();
+
         FileUtil wordcount = new FileUtil(ar, data);
 
         try{

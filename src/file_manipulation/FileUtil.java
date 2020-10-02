@@ -3,8 +3,7 @@ package file_manipulation;
 import java.io.*;
 import java.lang.reflect.Constructor;
 
-import file_manipulation.counter.DataCounter;
-import file_manipulation.counter.MixCounter;
+import file_manipulation.counter.*;
 import file_manipulation.exception.InvalidArgumentUtil;
 
 //Abstract super class for all file operations
@@ -13,21 +12,19 @@ public class FileUtil {
     protected Administrator arguments;
     private static final int NUMBER_ARGUMENTS = 1;
 
-    private Class<? extends DataCounter> countable;
+    private Class<? extends Countable> countable;
 
-    public FileUtil(Administrator admin, DataCounter data) {
+    public FileUtil(Administrator admin, Countable data) {
         this.arguments      = admin;
-        countable           = data.getClass();
         srcPath             = new File[NUMBER_ARGUMENTS];
-
+        countable           = (data instanceof DataCounter) ?  data.getClass() : DataCounter.class;
         this.processArguments(NUMBER_ARGUMENTS);
     }
 
     public FileUtil(Administrator admin, DataCounter data, int numberArguments){
         this.arguments      = admin;
-        countable           = data.getClass();
         srcPath             = new File[numberArguments];
-
+        countable           = (data instanceof DataCounter) ?  data.getClass() : DataCounter.class;
         this.processArguments(numberArguments);
     }
 
@@ -72,17 +69,17 @@ public class FileUtil {
         }
         
         // Invoke constructor of Counter
-        Constructor<? extends DataCounter> countConstructor = countable
+        Constructor<? extends Countable> countConstructor = countable
                 .getDeclaredConstructor(File.class);
 
-        try(DataCounter data = countConstructor.newInstance(srcPath[0])){
+        try(DataCounter data = (DataCounter) countConstructor.newInstance(srcPath[0])) {
             boolean verbose = arguments.getVerbose();
 
-            if(data.getClass().getName() == MixCounter.class.getName()){
-                if(verbose)     data.counter('w', 'l', 'c');
+            if(data.getClass().getName() == Wc.class.getName()){
+                if(verbose)     data.counter('c', 'w', 'l');
                 else            data.counter();
 
-                Print.verboseMix((MixCounter)data, verbose, srcPath[0]);
+                Print.verboseMix((Wc)data, verbose, srcPath[0]);
             }
             else{
                 data.counter();

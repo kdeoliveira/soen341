@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
 import file_manipulation.counter.DataCounter;
-import file_manipulation.counter.MixCounter;
+import file_manipulation.counter.Wc;
 
 import java.io.*;
 /**
@@ -77,22 +77,22 @@ public final class Print {
     public static void verbose(final DataCounter o,final boolean condition,final File sourceFile) {
         if(condition && o.getVerbose() != null){
             output.printf(("File "+ANSI_YELLOW+"%s"+ANSI_RESET+" has been verified %n"),sourceFile.getName());
-            output.printf(o.getVerbose(), o.getCounter());
+            output.printf(o.getVerbose(), o.getCounter()[0]);
         }
         else
-            output.print(o.getCounter());
+            output.print(o.getCounter()[0]);
         
         output.println();
         output.flush();
     }
 
-    public static void verboseMix(final MixCounter obj, final boolean condition, final File sourceFile) {
+    public static void verboseMix(final Wc obj, final boolean condition, final File sourceFile) {
         if(condition && obj.getVerbose() != null){
             output.printf(("File "+ANSI_YELLOW+"%s"+ANSI_RESET+" has been verified %n"),sourceFile.getName());
-            output.printf(obj.getVerbose(), obj.getCounterChar(), obj.getCounterWord(), obj.getCounterLine());
+            output.printf(obj.getVerbose(), obj.getCounter()[0], obj.getCounter()[1], obj.getCounter()[2]);
         }
         else
-            output.print(obj.getCounterChar()+" "+obj.getCounterWord()+" "+obj.getCounterLine());
+            array(obj.getCounter());
         
         output.println();
         output.flush();
@@ -115,6 +115,11 @@ public final class Print {
     public static void newline(){
         output.println();
         output.flush();
+    }
+    public static void array(int[] arr){
+        for(int x : arr){
+            output.printf("%s ", x);
+        }
     }
     public static void exit(final String str){
         output.println(str);

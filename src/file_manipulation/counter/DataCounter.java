@@ -9,7 +9,7 @@ public abstract class DataCounter implements Closeable, Countable{
     protected static final char NEWLINE = '\n';
     protected static final char RETURN = '\r';
     protected String VERBOSEMESSAGE = null;
-    protected int counter = 0;
+    protected int[] counter;
     private int size = 0;
     protected char outputChar;
     FileInputStream file;
@@ -45,7 +45,7 @@ public abstract class DataCounter implements Closeable, Countable{
         throw new UnsupportedOperationException();
     }
 
-    public int getCounter(){
+    public int[] getCounter(){
         return this.counter;
     }
 
