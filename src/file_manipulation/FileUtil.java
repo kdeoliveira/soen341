@@ -85,7 +85,6 @@ public class FileUtil {
                 data.counter();
                 Print.verbose(data, verbose, srcPath[0]);
             }
-                
         }
         catch(Exception e){
             throw new IOException();

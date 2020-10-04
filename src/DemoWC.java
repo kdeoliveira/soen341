@@ -5,12 +5,11 @@ import file_manipulation.counter.*;
 
 public class DemoWC {
     public static void main(String[] args) {
-        Administrator ar = new Administrator(args);
-
-        Countable data = new Wc();
-
-        FileUtil wordcount = new FileUtil(ar, data);
-
+        Class<Void> clazz;
+        FileUtil wordcount = new FileUtil(
+                                            new Administrator(args),
+                                            new Wc(void)
+                                        );
         try{
             wordcount.execute();
         }
