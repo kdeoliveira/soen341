@@ -67,6 +67,7 @@ public class FileUtil {
         catch(InvalidArgumentUtil e){
             e.printError();
         }
+
         
         // Invoke constructor of Counter
         Constructor<? extends Countable> countConstructor = countable
@@ -76,13 +77,12 @@ public class FileUtil {
             boolean verbose = arguments.getVerbose();
 
             if(data.getClass().getName() == Wc.class.getName()){
-                if(verbose)     data.counter('c', 'w', 'l');
-                else            data.counter();
+                data.fork(verbose);
 
                 Print.verboseMix((Wc)data, verbose, srcPath[0]);
             }
             else{
-                data.counter();
+                data.fork(verbose);
                 Print.verbose(data, verbose, srcPath[0]);
             }
         }

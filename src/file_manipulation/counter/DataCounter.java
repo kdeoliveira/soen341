@@ -2,55 +2,35 @@ package file_manipulation.counter;
 
 import java.io.*;
 
-public abstract class DataCounter implements Closeable, Countable{
-    protected static final int EOF = -1;
+import file_manipulation.Data;
+
+public abstract class DataCounter extends Data implements Countable{
     protected static final char NONE = '\0';
     protected static final char SPACE = ' ';
     protected static final char NEWLINE = '\n';
     protected static final char RETURN = '\r';
+
     protected String VERBOSEMESSAGE = null;
-    protected int[] counter;
-    private int size = 0;
-    protected char outputChar;
-    FileInputStream file;
 
     public DataCounter(){
-        file = null;
-        outputChar = NONE;
+        super();
     }
 
     public DataCounter(File file) throws IOException{
-        outputChar = NONE;
-        this.file = new FileInputStream(file);
-        this.size = this.file.available();
+        super(file);
     }
 
-    public void setFile(File file) throws IOException{
-        this.file = new FileInputStream(file);
+    protected abstract void setDefaultOutput();
+    protected abstract void setOutput(char[] c);
+
+    protected void fork() throws IOException{
+        if(this.flagVerbose)    this.setDefaultOutput();
+        count(this.file.read());
     }
 
-    public void counter(char ch) throws IOException{
-        this.outputChar = ch;
-        count();
-    }
-    public void counter() throws IOException{
-        this.outputChar = NONE;
-        count();
-    }
-
-    protected abstract void count() throws IOException;
-
-    //Cannot be used with base class or subclass that did not implement it
-    public void counter(char character1, char character2, char character3) throws IOException{
-        throw new UnsupportedOperationException();
-    }
-
+    @Override
     public int[] getCounter(){
         return this.counter;
-    }
-
-    public int size(){
-        return this.size;
     }
 
     public String getVerbose(){
@@ -59,12 +39,7 @@ public abstract class DataCounter implements Closeable, Countable{
 
     public void setVerboseMessage(String str){
         CharSequence sformat = "%s";
-        
         if(str.contains(sformat))       this.VERBOSEMESSAGE = str;
-        
     }
 
-    public void close() throws IOException{
-            file.close();
-    }
 }

@@ -4,5 +4,5 @@ import java.io.IOException;
 
 @FunctionalInterface
 public interface Countable {
-    public void counter() throws IOException;
+    public void count(int ch) throws IOException;
 }

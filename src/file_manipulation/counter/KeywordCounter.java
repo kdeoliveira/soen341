@@ -7,22 +7,33 @@ import file_manipulation.Print;
 
 public class KeywordCounter extends DataCounter {
 
+    private char outputChar;
     private boolean flagKeyword = false;
 
     public KeywordCounter(File file) throws IOException{
         super(file);
         this.counter = new int[1];
         VERBOSEMESSAGE = "This file contains %s words";
+        this.outputChar = NONE;
     }
 
     public KeywordCounter() {
         super();
         this.counter = new int[1];
+        this.outputChar = NONE;
+    }
+
+    protected void setDefaultOutput(){
+        this.outputChar = 'c';
+    }
+    protected void setOutput(char[] c){
+        if(c.length != 1)   return;
+        this.outputChar = c[0];
     }
     
+    
     // Recursive counter for each keyword found between spaces
-	protected void count() throws IOException{
-        int ch = file.read();
+	public void count(int ch) throws IOException{
         if(ch == EOF)                  return;
 
         if((char) ch != SPACE)       {
@@ -35,7 +46,6 @@ public class KeywordCounter extends DataCounter {
         else{
             flagKeyword = false;
         }
-            
-        this.count();
+        this.fork();
     }
 }

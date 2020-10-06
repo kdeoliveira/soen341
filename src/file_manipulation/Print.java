@@ -64,7 +64,7 @@ public final class Print {
 
     public static void verbose(final Object o,final boolean condition, final String str, final File sourceFile) {
         if(condition && str != null){
-            output.printf(("File "+ANSI_YELLOW+"%s"+ANSI_RESET+" has been verified %n"),sourceFile.getName());
+            output.printf(("%nFile "+ANSI_YELLOW+"%s"+ANSI_RESET+" has been verified %n"),sourceFile.getName());
             output.printf(str, o.toString());
         }
         else
@@ -76,7 +76,7 @@ public final class Print {
 
     public static void verbose(final DataCounter o,final boolean condition,final File sourceFile) {
         if(condition && o.getVerbose() != null){
-            output.printf(("File "+ANSI_YELLOW+"%s"+ANSI_RESET+" has been verified %n"),sourceFile.getName());
+            output.printf(("%nFile "+ANSI_YELLOW+"%s"+ANSI_RESET+" has been verified %n"),sourceFile.getName());
             output.printf(o.getVerbose(), o.getCounter()[0]);
         }
         else
@@ -88,7 +88,7 @@ public final class Print {
 
     public static void verboseMix(final Wc obj, final boolean condition, final File sourceFile) {
         if(condition && obj.getVerbose() != null){
-            output.printf(("File "+ANSI_YELLOW+"%s"+ANSI_RESET+" has been verified %n"),sourceFile.getName());
+            output.printf(("%nFile "+ANSI_YELLOW+"%s"+ANSI_RESET+" has been verified %n"),sourceFile.getName());
             output.printf(obj.getVerbose(), obj.getCounter()[0], obj.getCounter()[1], obj.getCounter()[2]);
         }
         else
