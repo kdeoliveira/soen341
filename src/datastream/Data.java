@@ -1,4 +1,4 @@
-package file_manipulation;
+package datastream;
 
 import java.io.*;
 

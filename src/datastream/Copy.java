@@ -1,8 +1,8 @@
-package file_manipulation;
+package datastream;
 
 import java.io.*;
 
-import file_manipulation.exception.InvalidArgumentUtil;
+import datastream.exception.InvalidArgumentUtil;
 
 public class Copy extends FileUtil{
     private static final int NUMBER_ARGUMENTS = 2;

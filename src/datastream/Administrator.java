@@ -1,8 +1,8 @@
-package file_manipulation;
+package datastream;
 
 import java.util.*;
 
-import file_manipulation.exception.InvalidArgumentUtil;
+import datastream.exception.InvalidArgumentUtil;
 
 public class Administrator {
     private List<String> argsName;
@@ -66,11 +66,11 @@ public class Administrator {
     }
 
     //Verifies if quantity of arguments is provided
-    public boolean isValid(int minSize, int maxSize) throws InvalidArgumentUtil{
+    public boolean isValid(int minSize, int expectedSize) throws InvalidArgumentUtil{
         if(argsSize < minSize)
             throw new InvalidArgumentUtil("missing operand");
 
-        return argsSize <= maxSize;
+        return argsSize == expectedSize;
     }
 
     public int argumentSize(){

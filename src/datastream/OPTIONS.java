@@ -1,4 +1,4 @@
-package file_manipulation;
+package datastream;
 
 //Provides options values and methods for command line
 public enum OPTIONS{

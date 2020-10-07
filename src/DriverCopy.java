@@ -1,18 +1,20 @@
 import java.io.IOException;
 
-import file_manipulation.*;
+import datastream.*;
+import datastream.transfer.Copy;
 
 
 public class DriverCopy {
     public static void main(String[] args){
         Administrator ar = new Administrator(args);
 
-        Copy copy = new Copy(ar);
+        Data copy = new Copy();
+        FileSystem cp = new FileMgmt(ar, copy);
 
         try{
-            copy.execute();
+            cp.execute();
         }
-        catch(IOException e){
+        catch(IOException | NoSuchMethodException e) {
             e.printStackTrace();
         }
     }

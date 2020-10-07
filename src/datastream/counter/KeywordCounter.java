@@ -1,8 +1,8 @@
-package file_manipulation.counter;
+package datastream.counter;
 
 import java.io.*;
 
-import file_manipulation.Print;
+import datastream.Print;
 
 
 public class KeywordCounter extends DataCounter {

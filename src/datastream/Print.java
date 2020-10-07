@@ -1,10 +1,10 @@
-package file_manipulation;
+package datastream;
 
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
-import file_manipulation.counter.DataCounter;
-import file_manipulation.counter.Wc;
+import datastream.counter.DataCounter;
+import datastream.counter.Wc;
 
 import java.io.*;
 /**

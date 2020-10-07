@@ -1,4 +1,4 @@
-package file_manipulation.counter;
+package datastream.counter;
 
 import java.io.IOException;
 

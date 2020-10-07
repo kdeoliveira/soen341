@@ -1,11 +1,11 @@
-package file_manipulation.transfer;
+package datastream.transfer;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import file_manipulation.Data;
-import file_manipulation.Print;
+import datastream.Data;
+import datastream.Print;
 
 public class Copy extends Data implements Transferable {
     private static final int NUMBER_ARGUMENT = 2;

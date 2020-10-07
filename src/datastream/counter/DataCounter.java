@@ -1,8 +1,8 @@
-package file_manipulation.counter;
+package datastream.counter;
 
 import java.io.*;
 
-import file_manipulation.Data;
+import datastream.Data;
 
 public abstract class DataCounter extends Data implements Countable{
     protected static final char NONE = '\0';

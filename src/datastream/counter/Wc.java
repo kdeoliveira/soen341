@@ -1,9 +1,9 @@
-package file_manipulation.counter;
+package datastream.counter;
 
 import java.io.*;
 import java.util.Arrays;
 
-import file_manipulation.Print;
+import datastream.Print;
 
 public class Wc extends DataCounter {
     private boolean flagKeyword = false;

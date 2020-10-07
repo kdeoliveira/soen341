@@ -1,42 +1,41 @@
-package file_manipulation.counter;
-
+package datastream.counter;
 import java.io.*;
 
-import file_manipulation.Print;
+import datastream.Print;
 
-public class CharacterCounter extends DataCounter{
+public class SequenceCounter extends DataCounter{
 
     private char outputChar;
 
-    public CharacterCounter(){
+    public SequenceCounter(){
         super();
         this.counter = new int[1];
         this.outputChar = NONE;
     }
-    
-    public CharacterCounter(File file) throws IOException{
+    public SequenceCounter(File file) throws IOException{
         super(file);
         this.counter = new int[1];
-        VERBOSEMESSAGE = "This file contains %s characters";
+        VERBOSEMESSAGE = "This file contains %s lines";
         this.outputChar = NONE;
     }
 
     protected void setDefaultOutput(){
-        this.outputChar = 'c';
+        this.outputChar = 'l';
     }
     protected void setOutput(char[] c){
         if(c.length != 1)   return;
         this.outputChar = c[0];
     }
 
-    // Recursive counter of each charactere, except new line 
+    // Recursive counter of each new line 
     public void count(int ch) throws IOException{
         if(ch == EOF)                  return;
 
-        if((char) ch != NEWLINE)       {
+        if((char) ch == NEWLINE)       {
             this.counter[0] += 1;
             Print.character(outputChar);
         }
+
         this.fork();
     }
 }

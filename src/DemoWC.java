@@ -1,7 +1,7 @@
 import java.io.IOException;
 
-import file_manipulation.*;
-import file_manipulation.counter.*;
+import datastream.*;
+import datastream.counter.*;
 
 public class DemoWC {
     public static void main(String[] args) {
