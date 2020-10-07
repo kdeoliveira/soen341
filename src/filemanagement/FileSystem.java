@@ -1,8 +1,10 @@
-package datastream;
+package filemanagement;
 
 import java.io.*;
 
-import datastream.exception.InvalidArgumentUtil;
+import filemanagement.exception.*;
+import filemanagement.util.*;
+import datastream.*;
 
 public abstract class FileSystem {
     protected File [] srcPath;

@@ -1,10 +1,12 @@
-package datastream;
+package filemanagement;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
 
+import datastream.*;
 import datastream.counter.*;
-import datastream.exception.InvalidArgumentUtil;
+import filemanagement.exception.*;
+import filemanagement.util.*;
 
 //Abstract super class for all file operations
 public class FileUtil extends FileSystem{

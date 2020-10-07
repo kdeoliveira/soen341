@@ -1,8 +1,8 @@
-package datastream;
+package filemanagement.util;
 
 import java.util.*;
 
-import datastream.exception.InvalidArgumentUtil;
+import filemanagement.exception.InvalidArgumentUtil;
 
 public class Administrator {
     private List<String> argsName;

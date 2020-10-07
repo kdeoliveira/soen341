@@ -1,9 +1,11 @@
-package datastream;
+package filemanagement;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
 
-import datastream.exception.*;
+import datastream.*;
+import filemanagement.exception.*;
+import filemanagement.util.*;
 
 public class FileMgmt extends FileSystem{
     private static final int NUMBER_ARGUMENTS = 2;

@@ -2,8 +2,7 @@ package datastream.counter;
 
 import java.io.*;
 
-import datastream.Print;
-
+import filemanagement.util.*;
 
 public class KeywordCounter extends DataCounter {
 
@@ -24,7 +23,7 @@ public class KeywordCounter extends DataCounter {
     }
 
     protected void setDefaultOutput(){
-        this.outputChar = 'c';
+        this.outputChar = 'w';
     }
     protected void setOutput(char[] c){
         if(c.length != 1)   return;

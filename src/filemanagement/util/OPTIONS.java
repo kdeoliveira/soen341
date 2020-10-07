@@ -1,4 +1,4 @@
-package datastream;
+package filemanagement.util;
 
 //Provides options values and methods for command line
 public enum OPTIONS{

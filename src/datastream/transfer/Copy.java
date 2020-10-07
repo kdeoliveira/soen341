@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import datastream.Data;
-import datastream.Print;
+import filemanagement.util.*;
 
 public class Copy extends Data implements Transferable {
     private static final int NUMBER_ARGUMENT = 2;
