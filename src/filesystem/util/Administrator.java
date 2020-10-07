@@ -1,8 +1,8 @@
-package filemanagement.util;
+package filesystem.util;
 
 import java.util.*;
 
-import filemanagement.exception.InvalidArgumentUtil;
+import filesystem.exception.InvalidArgumentUtil;
 
 public class Administrator {
     private List<String> argsName;

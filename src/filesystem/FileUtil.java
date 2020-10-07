@@ -1,12 +1,12 @@
-package filemanagement;
+package filesystem;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
 
 import datastream.*;
 import datastream.counter.*;
-import filemanagement.exception.*;
-import filemanagement.util.*;
+import filesystem.exception.*;
+import filesystem.util.*;
 
 //Abstract super class for all file operations
 public class FileUtil extends FileSystem{

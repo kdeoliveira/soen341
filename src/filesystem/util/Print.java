@@ -1,4 +1,4 @@
-package filemanagement.util;
+package filesystem.util;
 
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;

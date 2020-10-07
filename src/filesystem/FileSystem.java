@@ -1,10 +1,10 @@
-package filemanagement;
+package filesystem;
 
 import java.io.*;
 
-import filemanagement.exception.*;
-import filemanagement.util.*;
 import datastream.*;
+import filesystem.exception.*;
+import filesystem.util.*;
 
 public abstract class FileSystem {
     protected File [] srcPath;

@@ -1,11 +1,11 @@
-package filemanagement;
+package filesystem;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
 
 import datastream.*;
-import filemanagement.exception.*;
-import filemanagement.util.*;
+import filesystem.exception.*;
+import filesystem.util.*;
 
 public class FileMgmt extends FileSystem{
     private static final int NUMBER_ARGUMENTS = 2;

@@ -2,7 +2,7 @@ package datastream.counter;
 
 import java.io.*;
 
-import filemanagement.util.*;
+import filesystem.util.*;
 
 public class CharacterCounter extends DataCounter{
 

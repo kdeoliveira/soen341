@@ -1,8 +1,8 @@
 import java.io.IOException;
 
 import datastream.counter.*;
-import filemanagement.FileUtil;
-import filemanagement.util.*;
+import filesystem.FileUtil;
+import filesystem.util.*;
 
 public class DemoWC {
     public static void main(String[] args) {

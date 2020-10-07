@@ -1,7 +1,7 @@
 package datastream.counter;
 import java.io.*;
 
-import filemanagement.util.*;
+import filesystem.util.*;
 
 public class SequenceCounter extends DataCounter{
 

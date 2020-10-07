@@ -1,4 +1,4 @@
-package filemanagement.util;
+package filesystem.util;
 
 //Provides options values and methods for command line
 public enum OPTIONS{

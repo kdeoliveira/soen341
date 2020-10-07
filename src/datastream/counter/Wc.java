@@ -3,7 +3,7 @@ package datastream.counter;
 import java.io.*;
 import java.util.Arrays;
 
-import filemanagement.util.*;
+import filesystem.util.*;
 
 public class Wc extends DataCounter {
     private boolean flagKeyword = false;
