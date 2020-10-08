@@ -3,7 +3,7 @@ package filesystem.util;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
-import datastream.counter.DataCounter;
+import datastream.counter.wcOO;
 import datastream.counter.Wc;
 
 import java.io.*;
@@ -74,7 +74,7 @@ public final class Print {
         output.flush();
     }
 
-    public static void verbose(final DataCounter o,final boolean condition,final File sourceFile) {
+    public static void verbose(final wcOO o,final boolean condition,final File sourceFile) {
         if(condition && o.getVerbose() != null){
             output.printf(("%nFile "+ANSI_YELLOW+"%s"+ANSI_RESET+" has been verified %n"),sourceFile.getName());
             output.printf(o.getVerbose(), o.getCounter()[0]);

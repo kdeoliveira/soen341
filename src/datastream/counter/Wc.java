@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 import filesystem.util.*;
 
-public class Wc extends DataCounter {
+public class Wc extends wcOO {
     private boolean flagKeyword = false;
     private char[] outputChar;
 

@@ -4,7 +4,7 @@ import java.io.*;
 
 import filesystem.util.*;
 
-public class KeywordCounter extends DataCounter {
+public class KeywordCounter extends wcOO {
 
     private char outputChar;
     private boolean flagKeyword = false;

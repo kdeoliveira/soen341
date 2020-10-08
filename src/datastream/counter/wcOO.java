@@ -4,7 +4,7 @@ import java.io.*;
 
 import datastream.Data;
 
-public abstract class DataCounter extends Data implements Countable{
+public abstract class wcOO extends Data implements Countable{
     protected static final char NONE = '\0';
     protected static final char SPACE = ' ';
     protected static final char NEWLINE = '\n';
@@ -12,11 +12,11 @@ public abstract class DataCounter extends Data implements Countable{
 
     protected String VERBOSEMESSAGE = null;
 
-    public DataCounter(){
+    public wcOO(){
         super();
     }
 
-    public DataCounter(File file) throws IOException{
+    public wcOO(File file) throws IOException{
         super(file);
     }
 

@@ -48,7 +48,7 @@ public class FileUtil extends FileSystem{
             }
             else{
                 countable.fork(verbose);
-                Print.verbose((DataCounter)countable, verbose, srcPath[0]);
+                Print.verbose((wcOO)countable, verbose, srcPath[0]);
             }
         }
         catch(Exception e){

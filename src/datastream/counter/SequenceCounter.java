@@ -3,7 +3,7 @@ import java.io.*;
 
 import filesystem.util.*;
 
-public class SequenceCounter extends DataCounter{
+public class SequenceCounter extends wcOO{
 
     private char outputChar;
 

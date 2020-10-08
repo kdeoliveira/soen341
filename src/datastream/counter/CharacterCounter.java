@@ -4,7 +4,7 @@ import java.io.*;
 
 import filesystem.util.*;
 
-public class CharacterCounter extends DataCounter{
+public class CharacterCounter extends wcOO{
 
     private char outputChar;
 
