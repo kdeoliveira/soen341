@@ -26,6 +26,7 @@ public class FileMgmt extends FileSystem{
     public boolean execute() throws IOException, NoSuchMethodException{
         try{
             arguments.execOptions(this.getClass(), Print.FILESOURCE, Print.DESTSOURCE);
+            this.processArguments(this.numberOfArguments);
             //Checks if src file not valid
             if(!this.isFileValid())    throw new InvalidArgumentUtil("Invalid source file");
         }
@@ -33,6 +34,8 @@ public class FileMgmt extends FileSystem{
             e.printError();
 
         }
+
+        
 
         Constructor<? extends Data> dataConstructor = this.data.getDeclaredConstructor(File.class, File.class);
 

@@ -28,12 +28,13 @@ public class FileUtil extends FileSystem{
     public boolean execute() throws IOException, NoSuchMethodException{
         try{
             arguments.execOptions(this.data, Print.FILESOURCE);
+            this.processArguments(this.numberOfArguments);
             if(!this.isFileValid())    throw new InvalidArgumentUtil("Invalid source file");
         }
         catch(InvalidArgumentUtil e){
             e.printError();
         }
-        
+
         // Invoke constructor of Counter
         Constructor<? extends Data> countConstructor = this.data
                 .getDeclaredConstructor(File.class);

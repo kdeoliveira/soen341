@@ -10,12 +10,13 @@ public abstract class FileSystem {
     protected File [] srcPath;
     protected Administrator arguments;
     protected Class<? extends Data> data;
+    protected int numberOfArguments = 0;
 
     public FileSystem(Administrator admin, Data data, int numberOfArguments){
         this.arguments      = admin;
         this.srcPath             = new File[numberOfArguments];
         this.data           = (data instanceof Data) ?  data.getClass() : Data.class;
-        this.processArguments(numberOfArguments);
+        this.numberOfArguments = numberOfArguments;
     }
 
     public FileSystem(Administrator admin, int numberOfArguments){
@@ -23,11 +24,11 @@ public abstract class FileSystem {
         this.data           = null;
         srcPath             = new File[numberOfArguments];
 
-        this.processArguments(numberOfArguments);
+        this.numberOfArguments = numberOfArguments;
     }
 
     // Parse arguments based on number of allowed arguments
-    private void processArguments(int numberOfArguments){
+    protected void processArguments(int numberOfArguments){
         try{
              if(arguments.isValid(0, numberOfArguments))     this.assignFileAttributes();
              else                                            throw this.throwInvalidArgument();
