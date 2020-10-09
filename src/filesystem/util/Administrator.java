@@ -69,8 +69,10 @@ public class Administrator {
     public boolean isValid(int minSize, int expectedSize) throws InvalidArgumentUtil{
         if(argsSize < minSize)
             throw new InvalidArgumentUtil("missing operand");
+        
+        System.out.println(argsSize);
 
-        return argsSize == expectedSize;
+        return argsSize <= expectedSize;
     }
 
     public int argumentSize(){
