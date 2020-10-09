@@ -70,8 +70,6 @@ public class Administrator {
         if(argsSize < minSize)
             throw new InvalidArgumentUtil("missing operand");
         
-        System.out.println(argsSize);
-
         return argsSize <= expectedSize;
     }
 
